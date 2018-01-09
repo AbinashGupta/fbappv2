@@ -1,0 +1,28 @@
+{
+  "name": "fbappv2",
+  "version": "0.0.1",
+  "description": "A simple MVC mean boiler plate.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: I don't have any test yet :-[\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "chai": "~1.8.1",
+    "cookie-parser": "^1.3.5",
+    "debug": "^2.1.1",
+    "ejs": "^2.5.7",
+    "express": "^4.13.1",
+    "express-session": "^1.10.1",
+    "method-override": "~2.3.5",
+    "mocha": "",
+    "mongodb": "^3.0.1",
+    "mongoose": "^5.0.0-rc1",
+    "morgan": "^1.6.1",
+    "multer": "",
+    "pug": "",
+    "serve-favicon": "^2.2.0",
+    "should": "~2.1.0"
+  },
+  "author": "Abinash Gupta"
+}

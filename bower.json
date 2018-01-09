@@ -1,0 +1,8 @@
+{
+  "name": "fbapp",
+  "description": "First fb app social",
+  "license": "Private",
+  "dependencies": {
+    "angular": "angularjs#^1.6.8"
+  }
+}
