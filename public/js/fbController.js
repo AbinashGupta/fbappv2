@@ -42,20 +42,17 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
 	}
 
 	function refresh(){
-		$facebook.api("/me").then(function(response){
+		$facebook.api("/me?fields=id,name,gender,locale,first_name,last_name,email").then(function(response){
 			$scope.welcomeMsg = "Welcome "+ response.name;
 			$scope.isLoggedIn = true;
-            $scope.userId = response.id;
-            $facebook.api('/{$scope.userId}').then(function(response){
-                $scope.userInfo = response;
-                $facebook.api('/me/picture').then(function(response){
-                    $scope.picture = response.data.url;
-                    $facebook.api('/me/permissions').then(function(response){
-                        $scope.permissions = response.data;
-                        $facebook.api('/me/posts').then(function(response){
-                            console.log(response.data);
-                            $scope.posts = response.data;
-                        });
+            $scope.userInfo = response;
+            $facebook.api('/me/picture').then(function(response){
+                $scope.picture = response.data.url;
+                $facebook.api('/me/permissions').then(function(response){
+                    $scope.permissions = response.data;
+                    $facebook.api('/me/posts').then(function(response){
+                        console.log(response.data);
+                        $scope.posts = response.data;
                     });
                 });
             });
