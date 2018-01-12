@@ -11,7 +11,7 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
 
 .config( function( $facebookProvider ) {
   $facebookProvider.setAppId('1198237676975868');
-  $facebookProvider.setPermissions("email,public_profile, user_posts, publish_actions, user_photos, user_tagged_places");
+  $facebookProvider.setPermissions("email,public_profile, user_posts, publish_actions, user_photos, user_tagged_places, user_location");
 })
 
 .run(function($rootScope){
@@ -41,11 +41,15 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
 		});
 	}
 
+	$scope.calcDistance = function() {}
+
 	function refresh(){
-		$facebook.api("/me?fields=id,name,gender,locale,first_name,last_name,email").then(function(response){
+		$facebook.api("/me?fields=id,name,gender,locale,first_name,last_name,email,location").then(function(response){
 			$scope.welcomeMsg = "Welcome "+ response.name;
 			$scope.isLoggedIn = true;
-            $scope.userInfo = response;
+			$scope.userInfo = response;
+			console.log("Userinfo");
+			console.log($scope.userInfo);
             $facebook.api('/me/picture').then(function(response){
                 $scope.picture = response.data.url;
                 $facebook.api('/me/permissions').then(function(response){
@@ -57,7 +61,14 @@ angular.module('ngSocial.facebook', ['ngRoute','ngFacebook'])
                     $facebook.api('/me/tagged_places').then(function(response){
                         console.log(response.data);
                         $scope.places = response.data;
-                    });
+					});
+					$facebook.api('/' + $scope.userInfo.location.id, {
+						fields: 'location'
+					}).then(function(locationResponse) {
+						$scope.currLocation = locationResponse;
+						console.log('Cuurent location object');
+						console.log($scope.currLocation);
+					});
                 });
             });
 		},
